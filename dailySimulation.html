@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Daily Schedule Simulation</title>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding-top: 60px; background-color: #eef;">
+
+  <h1>My Simulated Day</h1>
+  <div id="output" style="margin-top: 40px; font-size: 1.5rem;"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // Helper to write one line of text to the page (DOM update)
+    function show(message) {
+      output.textContent = message;
+    }
+
+    // Each event has a delay (ms) and a message to show
+    // 1000ms = 1 second in real time
+    const schedule = [
+      { delay: 0,    text: "07:00 ☀️ Wake up and get ready" },
+      { delay: 1000, text: "07:30 ☕ Coffee and plan the day" },
+      { delay: 2000, text: "09:00 💻 Classwork and coding" },
+      { delay: 3000, text: "12:00 🍽️ Lunch break" },
+      { delay: 4000, text: "14:00 🎧 Focus session and assignments" },
+      { delay: 5000, text: "18:00 🎮 Gaming / unwind" },
+      { delay: 6000, text: "23:00 🌙 Wrap up and sleep" }
+    ];
+
+    // setTimeout schedules each event to happen later without blocking the page
+    schedule.forEach(event => {
+      setTimeout(() => {
+        show(event.text);
+      }, event.delay);
+    });
+
+    // Surprise/twist: random “unexpected event” at a random time in the middle
+    const surprises = [
+      "😼 Cat zoomies interruption",
+      "📦 Random delivery arrives",
+      "🔧 PC update reboot warning",
+      "💬 Friend texts with a plan"
+    ];
+
+    const randomDelay = 2500 + Math.floor(Math.random() * 2000); // between 2.5s and 4.5s
+    const randomPick = surprises[Math.floor(Math.random() * surprises.length)];
+
+    setTimeout(() => {
+      show("Surprise: " + randomPick);
+    }, randomDelay);
+
+    // Final message after everything finishes
+    setTimeout(() => {
+      show("✅ Day complete. Simulation finished.");
+    }, 7000);
+  </script>
+
+</body>
+</html>
